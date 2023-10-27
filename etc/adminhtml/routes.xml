@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="wms_sync" frontName="wms_sync">
+            <module name="Mikimpe_SyncWithWMS"/>
+        </route>
+    </router>
+</config>
