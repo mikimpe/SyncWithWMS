@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Mikimpe\SyncWithWMS\Block\Adminhtml\Product\Edit\SyncWithWMSBlock"
+                   name="mikimpe.sync_with_wms.sync_action"
+                   template="Mikimpe_SyncWithWMS::sync_action.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="sync-with-wms-action" xsi:type="array">
+                                <item name="component" xsi:type="string">Mikimpe_SyncWithWMS/js/sync-action</item>
+                            </item>
+                        </item>
+                    </argument>
+                    <argument name="view_model" xsi:type="object">Mikimpe\SyncWithWMS\ViewModel\SyncActionViewModel</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

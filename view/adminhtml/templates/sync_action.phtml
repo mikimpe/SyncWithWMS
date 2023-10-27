@@ -1,0 +1,21 @@
+<?php
+declare(strict_types=1);
+
+use Mikimpe\SyncWithWMS\Block\Adminhtml\Product\Edit\SyncWithWMSBlock;
+use Mikimpe\SyncWithWMS\ViewModel\SyncActionViewModel;
+
+/** @var SyncWithWMSBlock $block */
+
+/** @var SyncActionViewModel $configViewModel */
+$configViewModel = $block->getViewModel();
+?>
+<?php if ($configViewModel->isEnabled()) : ?>
+    <script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": <?= /* @escapeNotVerified */ $block->getJsLayout();?>
+        }
+    }
+ </script>
+<?php endif; ?>
+
