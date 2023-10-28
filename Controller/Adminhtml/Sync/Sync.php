@@ -6,6 +6,7 @@ namespace Mikimpe\SyncWithWMS\Controller\Adminhtml\Sync;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 
 class Sync extends Action implements HttpGetActionInterface
@@ -25,13 +26,21 @@ class Sync extends Action implements HttpGetActionInterface
         $this->jsonFactory = $jsonFactory;
     }
 
-    public function execute()
+    /**
+     * @return Json
+     */
+    public function execute(): Json
     {
         $sku = $this->_request->getParam('sku');
 
         $result = $this->jsonFactory->create();
-        $result->setData(['success' => true]);
-        $result->setData(['qty' => 10]);
+        $result->setData(
+            [
+                'success' => true,
+                'qty' => 100,
+                'sku' => $sku
+            ]
+        );
 
         return $result;
     }

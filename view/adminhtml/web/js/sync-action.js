@@ -2,24 +2,26 @@ define([
     'uiComponent',
     'jquery',
     'underscore',
-], function (Component, $, _) {
+    'Magento_Ui/js/modal/alert',
+    'mage/translate'
+], function (Component, $, _, alert, $t) {
 
     'use strict';
 
     return Component.extend({
         /**
-         * Initialize Component
+         * @override
          */
         initialize: function () {
+            this._super();
             let self = this;
 
-            this._super();
-
             window.syncAction = function (url) {
-                let isEnabled = self.isEnabled;
-                if (!isEnabled) {
+                debugger
+                if (!self.isEnabled) {
                     return;
                 }
+
                 $.ajax({
                     url: url,
                     type: 'GET',
@@ -27,13 +29,31 @@ define([
 
                     success: function (data) {
                         debugger
+                        self.updateQtyField(data.qty);
+                        alert({
+                            title: $t('Quantity Successfully Synced From WMS'),
+                            content: $t('The received quantity (%1) has been set as the value of the <b>Quantity</b> field of the product')
+                                .replace('%1', data.qty)
+                        });
                     },
 
                     error: function (jqXHR) {
                         debugger
+                        alert({
+                            title: $t('Error While Syncing Quantity From WMS'),
+                            content: $t('test content')
+                        });
                     }
                 });
             };
+        },
+
+        /**
+         * @param {int} qty
+         */
+        updateQtyField: function (qty) {
+            debugger
+            $("input[name='product[quantity_and_stock_status][qty]']").val(qty);
         }
     });
 });

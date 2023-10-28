@@ -1,1 +1,4 @@
 "Sync with WMS","Sincronizza con il WMS"
+"Quantity Successfully Synced From WMS","Quantità Sincronizzata Con Successo Dal WMS"
+"Error While Syncing Quantity From WMS","Errore Durante La Sincronizzazione Della Quantità Dal WMS"
+"The received quantity (%1) has been set as the value of the <b>Quantity</b> field of the product","La quantità ricevuta (%1) è stata impostata come valore del campo <b>Quantità</b> del prodotto"

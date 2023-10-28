@@ -39,7 +39,7 @@ class SyncWithWMSBlock extends Template
     /**
      * @inheritDoc
      */
-    public function getJsLayout()
+    public function getJsLayout(): string
     {
         $layout = $this->json->unserialize(parent::getJsLayout());
 
@@ -51,7 +51,7 @@ class SyncWithWMSBlock extends Template
     /**
      * @inheritdoc
      */
-    public function toHtml()
+    public function toHtml(): string
     {
         if (!$this->config->isEnabled()) {
             return '';
