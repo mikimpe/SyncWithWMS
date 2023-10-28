@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="wms_sync_request_history" resource="default" engine="innodb" comment="History of requests made to the WMS">
+        <column xsi:type="int" name="entry_id" unsigned="true" nullable="false" identity="true" comment="Entry ID"/>
+        <column xsi:type="varchar" name="sku" nullable="false" length="64" comment="SKU"/>
+        <column xsi:type="smallint" name="status_code" padding="3" default="0" unsigned="true" nullable="false"
+                identity="false" comment="Status Code Of The Response"/>
+        <column xsi:type="int" name="qty_received" unsigned="false" nullable="true" identity="false"
+                comment="Quantity Received From WMS"/>
+        <column xsi:type="text" name="error_msg" nullable="true" comment="Error Message"/>
+        <column xsi:type="datetime" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Timestamp Of The Request" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entry_id"/>
+        </constraint>
+    </table>
+</schema>
+
+
