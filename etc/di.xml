@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Mikimpe\SyncWithWMS\Api\Data\WMSSyncRequestHistoryInterface"
+                type="Mikimpe\SyncWithWMS\Model\WMSSyncRequestHistory"/>
+    <preference for="Mikimpe\SyncWithWMS\Api\Data\WMSSyncRequestHistorySearchResultInterface"
+                type="Mikimpe\SyncWithWMS\Model\WMSSyncRequestHistorySearchResult"/>
+    <preference for="Mikimpe\SyncWithWMS\Api\WMSSyncRequestHistoryRepositoryInterface"
+                type="Mikimpe\SyncWithWMS\Model\WMSSyncRequestHistoryRepository"/>
+
+    <type name="Mikimpe\SyncWithWMS\Model\WMSSyncRequestHistoryRepository">
+        <arguments>
+            <argument name="logger" xsi:type="object">Mikimpe\SyncWithWMS\Virtual\Logger</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Mikimpe\SyncWithWMS\Virtual\Logger" type="Monolog\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">Mikimpe::SyncWithWMS</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Mikimpe\SyncWithWMS\Virtual\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mikimpe\SyncWithWMS\Virtual\Handler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/mikimpe_sync_with_wms.log</argument>
+        </arguments>
+    </virtualType>
+</config>
