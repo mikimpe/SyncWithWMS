@@ -6,7 +6,6 @@ namespace Mikimpe\SyncWithWMS\Model;
 use Exception;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
-use Magento\Framework\Api\SortOrder;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Mikimpe\SyncWithWMS\Api\Data\WMSSyncRequestHistoryInterface;
@@ -86,6 +85,9 @@ class WMSSyncRequestHistoryRepository implements WMSSyncRequestHistoryRepository
         return $WMSSyncRequestHistory;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getList(SearchCriteriaInterface $searchCriteria): WMSSyncRequestHistorySearchResultInterface
     {
         /** @var Collection $collection */
@@ -100,13 +102,23 @@ class WMSSyncRequestHistoryRepository implements WMSSyncRequestHistoryRepository
         return $searchResult;
     }
 
-    public function delete(WMSSyncRequestHistoryInterface $WMSSyncRequestHistory): bool
+    /**
+     * @inheritDoc
+     * @throws NoSuchEntityException
+     */
+    public function delete(WMSSyncRequestHistoryInterface $WMSSyncRequestHistory): void
     {
-        // TODO: Implement delete() method.
+        $this->deleteById($WMSSyncRequestHistory->getEntryId());
     }
 
-    public function deleteById(int $entryId): bool
+    /**
+     * @inheritDoc
+     * @throws NoSuchEntityException
+     * @throws Exception
+     */
+    public function deleteById(int $entryId): void
     {
-        // TODO: Implement deleteById() method.
+        $entity = $this->get($entryId);
+        $this->resourceModel->delete($entity);
     }
 }

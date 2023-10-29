@@ -29,13 +29,13 @@ interface WMSSyncRequestHistoryRepositoryInterface
 
     /**
      * @param WMSSyncRequestHistoryInterface $WMSSyncRequestHistory
-     * @return bool
+     * @return void
      */
-    public function delete(WMSSyncRequestHistoryInterface $WMSSyncRequestHistory): bool;
+    public function delete(WMSSyncRequestHistoryInterface $WMSSyncRequestHistory): void;
 
     /**
      * @param int $entryId
-     * @return bool
+     * @return void
      */
-    public function deleteById(int $entryId): bool;
+    public function deleteById(int $entryId): void;
 }
