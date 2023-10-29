@@ -29,23 +29,41 @@ define([
 
                     success: function (data) {
                         debugger
-                        self.updateQtyField(data.qty);
-                        alert({
-                            title: $t('Quantity Successfully Synced From WMS'),
-                            content: $t('The received quantity (%1) has been set as the value of the <b>Quantity</b> field of the product')
-                                .replace('%1', data.qty)
-                        });
+                        if (data.success) {
+                            self.processSuccessResponse(data.qty);
+                        } else {
+                            self.processErrorResponse(data.error_msg)
+                        }
                     },
 
-                    error: function (jqXHR) {
+                    error: function (data) {
                         debugger
-                        alert({
-                            title: $t('Error While Syncing Quantity From WMS'),
-                            content: $t('test content')
-                        });
+                        self.processErrorResponse(data.error_msg)
                     }
                 });
             };
+        },
+
+        /**
+         * @param {int} qty
+         */
+        processSuccessResponse: function (qty) {
+            this.updateQtyField(qty);
+            alert({
+                title: $t('Quantity Successfully Synced From WMS'),
+                content: $t('The received quantity (%1) has been set as the value of the <b>Quantity</b> field of the product')
+                    .replace('%1', qty)
+            });
+        },
+
+        /**
+         * @param {String} errorMsg
+         */
+        processErrorResponse: function (errorMsg) {
+            alert({
+                title: $t('Error While Syncing Quantity From WMS'),
+                content: $t(errorMsg ?? 'Undefined error')
+            });
         },
 
         /**
