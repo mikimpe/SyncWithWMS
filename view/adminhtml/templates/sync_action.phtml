@@ -6,10 +6,10 @@ use Mikimpe\SyncWithWMS\ViewModel\SyncActionViewModel;
 
 /** @var SyncWithWMSBlock $block */
 
-/** @var SyncActionViewModel $configViewModel */
-$configViewModel = $block->getViewModel();
+/** @var SyncActionViewModel $viewModel */
+$viewModel = $block->getViewModel();
 ?>
-<?php if ($configViewModel->isEnabled()) : ?>
+<?php if ($viewModel->isEnabled() && $viewModel->isAllowed()) : ?>
     <script type="text/x-magento-init">
     {
         "*": {

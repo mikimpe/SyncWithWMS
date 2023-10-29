@@ -5,6 +5,7 @@ namespace Mikimpe\SyncWithWMS\Block\Adminhtml\Product\Edit;
 
 use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context;
+use Magento\Backend\Model\Auth\Session;
 use Magento\Directory\Helper\Data as DirectoryHelper;
 use Magento\Framework\Json\Helper\Data as JsonHelper;
 use Magento\Framework\Serialize\Serializer\Json;
@@ -14,6 +15,7 @@ class SyncWithWMSBlock extends Template
 {
     private Json $json;
     private Config $config;
+    private Session $session;
 
     /**
      * @param Context $context
@@ -27,6 +29,7 @@ class SyncWithWMSBlock extends Template
         Template\Context $context,
         Json $json,
         Config $config,
+        Session $session,
         array $data = [],
         ?JsonHelper $jsonHelper = null,
         ?DirectoryHelper $directoryHelper = null
@@ -34,6 +37,7 @@ class SyncWithWMSBlock extends Template
         parent::__construct($context, $data, $jsonHelper, $directoryHelper);
         $this->json = $json;
         $this->config = $config;
+        $this->session = $session;
     }
 
     /**
@@ -44,6 +48,8 @@ class SyncWithWMSBlock extends Template
         $layout = $this->json->unserialize(parent::getJsLayout());
 
         $layout['components']['sync-with-wms-action']['isEnabled'] = $this->config->isEnabled();
+        $layout['components']['sync-with-wms-action']['isAllowed'] =
+            $this->session->isAllowed('Mikimpe_SyncWithWMS::sync');
 
         return $this->json->serialize($layout);
     }

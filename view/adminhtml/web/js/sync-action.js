@@ -18,7 +18,7 @@ define([
 
             window.syncAction = function (url) {
                 debugger
-                if (!self.isEnabled) {
+                if (!self.isEnabled || !self.isAllowed) {
                     return;
                 }
 
