@@ -2,3 +2,13 @@
 "Quantity Successfully Synced From WMS","Quantità Sincronizzata Con Successo Dal WMS"
 "Error While Syncing Quantity From WMS","Errore Durante La Sincronizzazione Della Quantità Dal WMS"
 "The received quantity (%1) has been set as the value of the <b>Quantity</b> field of the product","La quantità ricevuta (%1) è stata impostata come valore del campo <b>Quantità</b> del prodotto"
+"Enabled","Abilitato",module,Mikimpe_SyncWithWMS
+"Enable functionality","Abilitata funzionalità",module,Mikimpe_SyncWithWMS
+"Test Mode","Modalità Test",module,Mikimpe_SyncWithWMS
+"If enabled, the WMS sync request will be performed to the internal module","Se abilitata, la richiesta WMS sarà effettuata verso il modulo interno"
+"WMS Endpoint","Endpoint del WMS"
+"The WMS endpoint where the ""Sync with WMS"" request will be directed if test mode is disabled","L'endpoint del WMS verso dove sarà diretta la richesta ""Sincronizza con il WMS"" se la modalità di test è disabilitata"
+"Undefined error","Errore indefinito"
+"WMS endpoint not configured","L'endpoint del WMS non è configurato"
+"Unable to extract product quantity from WMS empty response body","Impossibile recuperare la quantità del prodotto dalla risposta vuota del WMS"
+"Unable to extract product quantity from WMS response body","Impossibile recuperare la quantità del prodotto dalla risposta del WMS"
