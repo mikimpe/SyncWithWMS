@@ -8,22 +8,27 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
+use Mikimpe\SyncWithWMS\Model\DoWMSSyncRequestAndSaveResult;
 
 class Sync extends Action implements HttpGetActionInterface
 {
     public const ADMIN_RESOURCE = 'Mikimpe_SyncWithWMS::sync';
     private JsonFactory $jsonFactory;
+    private DoWMSSyncRequestAndSaveResult $doWMSSyncRequestAndSaveResult;
 
     /**
-     * @param JsonFactory $jsonFactory
      * @param Context $context
+     * @param JsonFactory $jsonFactory
+     * @param DoWMSSyncRequestAndSaveResult $doWMSSyncRequestAndSaveResult
      */
     public function __construct(
+        Context $context,
         JsonFactory $jsonFactory,
-        Context $context
+        DoWMSSyncRequestAndSaveResult $doWMSSyncRequestAndSaveResult
     ) {
         parent::__construct($context);
         $this->jsonFactory = $jsonFactory;
+        $this->doWMSSyncRequestAndSaveResult = $doWMSSyncRequestAndSaveResult;
     }
 
     /**
@@ -33,15 +38,17 @@ class Sync extends Action implements HttpGetActionInterface
     {
         $sku = $this->_request->getParam('sku');
 
-        $result = $this->jsonFactory->create();
-        $result->setData(
+        $requestResult = $this->doWMSSyncRequestAndSaveResult->execute($sku);
+
+        $jsonResult = $this->jsonFactory->create();
+        $jsonResult->setData(
             [
-                'success' => true,
-                'qty' => 100,
-                'sku' => $sku
+                'success' => $requestResult->isSuccess(),
+                'qty' => $requestResult->getQty(),
+                'error_msg' => $requestResult->getErrorMsg()
             ]
         );
 
-        return $result;
+        return $jsonResult;
     }
 }

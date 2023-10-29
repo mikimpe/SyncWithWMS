@@ -14,6 +14,24 @@
         </arguments>
     </type>
 
+    <type name="Mikimpe\SyncWithWMS\Model\DoWMSSyncRequestAndSaveResult">
+        <arguments>
+            <argument name="logger" xsi:type="object">Mikimpe\SyncWithWMS\Virtual\Logger</argument>
+        </arguments>
+    </type>
+
+    <type name="Mikimpe\SyncWithWMS\Model\Request\ExtractQtyFromWMSResponse">
+        <arguments>
+            <argument name="logger" xsi:type="object">Mikimpe\SyncWithWMS\Virtual\Logger</argument>
+        </arguments>
+    </type>
+
+    <type name="Mikimpe\SyncWithWMS\Model\Request\ExtractErrorMsgFromWMSResponse">
+        <arguments>
+            <argument name="logger" xsi:type="object">Mikimpe\SyncWithWMS\Virtual\Logger</argument>
+        </arguments>
+    </type>
+
     <virtualType name="Mikimpe\SyncWithWMS\Virtual\Logger" type="Monolog\Logger">
         <arguments>
             <argument name="name" xsi:type="string">Mikimpe::SyncWithWMS</argument>
