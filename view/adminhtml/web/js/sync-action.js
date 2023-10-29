@@ -17,7 +17,6 @@ define([
             let self = this;
 
             window.syncAction = function (url) {
-                debugger
                 if (!self.isEnabled || !self.isAllowed) {
                     return;
                 }
@@ -28,7 +27,6 @@ define([
                     showLoader: true,
 
                     success: function (data) {
-                        debugger
                         if (data.success) {
                             self.processSuccessResponse(data.qty);
                         } else {
@@ -37,7 +35,6 @@ define([
                     },
 
                     error: function (data) {
-                        debugger
                         self.processErrorResponse(data.error_msg)
                     }
                 });
@@ -70,7 +67,6 @@ define([
          * @param {int} qty
          */
         updateQtyField: function (qty) {
-            debugger
             $("input[name='product[quantity_and_stock_status][qty]']").val(qty);
         }
     });

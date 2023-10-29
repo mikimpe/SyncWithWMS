@@ -73,17 +73,4 @@ class WMSSyncRequestResult
     {
         $this->errorMsg = $errorMsg;
     }
-
-//    /**
-//     * @return array
-//     */
-//    public function getData(): array
-//    {
-//        return [
-//            'success' => $this->success,
-//            'status_code' => $this->statusCode,
-//            'qty' => $this->qty,
-//            'error_msg' => $this->errorMsg,
-//        ];
-//    }
 }

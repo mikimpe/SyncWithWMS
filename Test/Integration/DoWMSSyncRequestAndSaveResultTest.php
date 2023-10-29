@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Mikimpe\SyncWithWMS\Test\Integration;
 
+use Exception;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\TestFramework\Helper\Bootstrap;
 use Mikimpe\SyncWithWMS\Api\Data\WMSSyncRequestHistoryInterface;
@@ -54,10 +55,12 @@ class DoWMSSyncRequestAndSaveResultTest extends TestCase
      */
     protected function tearDown(): void
     {
-        $WMSSYncRequestRepository = Bootstrap::getObjectManager()->get(WMSSyncRequestHistoryRepositoryInterface::class);
-        try {
-            $WMSSYncRequestRepository->delete($this->historyEntry);
-        } catch (\Exception) {}
+        if ($this->historyEntry) {
+            $WMSSYncRequestRepository = Bootstrap::getObjectManager()->get(WMSSyncRequestHistoryRepositoryInterface::class);
+            try {
+                $WMSSYncRequestRepository->delete($this->historyEntry);
+            } catch (Exception) {}
+        }
 
         parent::tearDown();
     }

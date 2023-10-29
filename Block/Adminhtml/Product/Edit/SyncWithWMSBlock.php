@@ -21,6 +21,7 @@ class SyncWithWMSBlock extends Template
      * @param Context $context
      * @param Json $json
      * @param Config $config
+     * @param Session $session
      * @param array $data
      * @param JsonHelper|null $jsonHelper
      * @param DirectoryHelper|null $directoryHelper
@@ -59,7 +60,7 @@ class SyncWithWMSBlock extends Template
      */
     public function toHtml(): string
     {
-        if (!$this->config->isEnabled()) {
+        if (!$this->config->isEnabled() || !$this->session->isAllowed('Mikimpe_SyncWithWMS::sync')) {
             return '';
         }
 

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Mikimpe\SyncWithWMS\Test\Integration;
 
+use Exception;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\TestFramework\Helper\Bootstrap;
@@ -134,7 +135,7 @@ class WMSSyncRequestHistoryRepositoryTest extends TestCase
             $WMSSYncRequestRepository = Bootstrap::getObjectManager()->get(WMSSyncRequestHistoryRepositoryInterface::class);
             try {
                 $WMSSYncRequestRepository->delete($this->entitySaved);
-            } catch (\Exception) {}
+            } catch (Exception) {}
         }
 
         parent::tearDown();
