@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="Mikimpe" sortOrder="200">
+        <tab id="Mikimpe" sortOrder="500">
             <label>Mikimpe</label>
         </tab>
         <section id="mikimpe_wms_sync"
@@ -33,6 +33,28 @@
                     <label>Enabled</label>
                     <comment>Enable functionality</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="test_mode"
+                       translate="label, comment"
+                       showInDefault="1"
+                       showInWebsite="0"
+                       showInStore="0"
+                       type="select">
+                    <label>Test Mode</label>
+                    <comment>If enabled, the WMS sync request will be performed to the internal module</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="wms_endpoint"
+                       translate="label, comment"
+                       showInDefault="1"
+                       showInWebsite="0"
+                       showInStore="0"
+                       type="text">
+                    <label>WMS Endpoint</label>
+                    <comment>The WMS endpoint where the "Sync with WMS" request will be directed if test mode is disabled</comment>
+                    <depends>
+                        <field id="test_mode">0</field>
+                    </depends>
                 </field>
             </group>
         </section>

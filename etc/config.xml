@@ -5,6 +5,7 @@
         <mikimpe_wms_sync>
             <general>
                 <enabled>1</enabled>
+                <test_mode>1</test_mode>
             </general>
         </mikimpe_wms_sync>
     </default>
