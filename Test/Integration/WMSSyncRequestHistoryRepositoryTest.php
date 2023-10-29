@@ -12,6 +12,8 @@ use PHPUnit\Framework\TestCase;
 
 class WMSSyncRequestHistoryRepositoryTest extends TestCase
 {
+    private ?WMSSyncRequestHistoryInterface $entitySaved = null;
+
     /**
      * @return void
      */
@@ -25,11 +27,11 @@ class WMSSyncRequestHistoryRepositoryTest extends TestCase
         $entity->setQtyReceived(10);
         $entity = $repository->save($entity);
 
-        $entitySaved = $repository->get($entity->getEntryId());
-        self::assertSame($entity->getEntryId(), $entitySaved->getEntryId());
-        self::assertSame('test', $entitySaved->getSku());
-        self::assertSame(200, $entitySaved->getStatusCode());
-        self::assertSame(10, $entitySaved->getQtyReceived());
+        $this->entitySaved = $repository->get($entity->getEntryId());
+        self::assertSame($entity->getEntryId(), $this->entitySaved->getEntryId());
+        self::assertSame('test', $this->entitySaved->getSku());
+        self::assertSame(200, $this->entitySaved->getStatusCode());
+        self::assertSame(10, $this->entitySaved->getQtyReceived());
     }
 
     /**
@@ -45,11 +47,11 @@ class WMSSyncRequestHistoryRepositoryTest extends TestCase
         $entity->setErrorMsg('Test Error');
         $entity = $repository->save($entity);
 
-        $entitySaved = $repository->get($entity->getEntryId());
-        self::assertSame($entity->getEntryId(), $entitySaved->getEntryId());
-        self::assertSame('test', $entitySaved->getSku());
-        self::assertSame(503, $entitySaved->getStatusCode());
-        self::assertSame('Test Error', $entitySaved->getErrorMsg());
+        $this->entitySaved = $repository->get($entity->getEntryId());
+        self::assertSame($entity->getEntryId(), $this->entitySaved->getEntryId());
+        self::assertSame('test', $this->entitySaved->getSku());
+        self::assertSame(503, $this->entitySaved->getStatusCode());
+        self::assertSame('Test Error', $this->entitySaved->getErrorMsg());
     }
 
     /**
@@ -124,5 +126,17 @@ class WMSSyncRequestHistoryRepositoryTest extends TestCase
 
         $this->expectException(NoSuchEntityException::class);
         $repository->delete($entity);
+    }
+
+    protected function tearDown(): void
+    {
+        if ($this->entitySaved) {
+            $WMSSYncRequestRepository = Bootstrap::getObjectManager()->get(WMSSyncRequestHistoryRepositoryInterface::class);
+            try {
+                $WMSSYncRequestRepository->delete($this->entitySaved);
+            } catch (\Exception) {}
+        }
+
+        parent::tearDown();
     }
 }
