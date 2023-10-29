@@ -3,11 +3,41 @@ declare(strict_types=1);
 
 namespace Mikimpe\SyncWithWMS\Model;
 
+use Magento\Framework\Data\Collection\AbstractDb;
 use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Model\ResourceModel\AbstractResource;
+use Magento\Framework\Registry;
+use Magento\Framework\Stdlib\DateTime;
 use Mikimpe\SyncWithWMS\Api\Data\WMSSyncRequestHistoryInterface;
 
 class WMSSyncRequestHistory extends AbstractModel implements WMSSyncRequestHistoryInterface
 {
+    private DateTime $dateTime;
+
+    /**
+     * @param Context $context
+     * @param Registry $registry
+     * @param DateTime $dateTime
+     * @param AbstractResource|null $resource
+     * @param AbstractDb|null $resourceCollection
+     * @param array $data
+     */
+    public function __construct(
+        Context $context,
+        Registry $registry,
+        DateTime $dateTime,
+        AbstractResource $resource = null,
+        AbstractDb $resourceCollection = null,
+        array $data = []
+    ) {
+        parent::__construct($context, $registry, $resource, $resourceCollection, $data);
+        $this->dateTime = $dateTime;
+    }
+
+    /**
+     * @inheritDoc
+     */
     protected function _construct()
     {
         parent::_construct();
@@ -17,9 +47,22 @@ class WMSSyncRequestHistory extends AbstractModel implements WMSSyncRequestHisto
     /**
      * @inheritDoc
      */
+    public function beforeSave()
+    {
+        parent::beforeSave();
+        if ($this->isObjectNew() && !$this->getCreatedAt()) {
+            $this->setCreatedAt($this->dateTime->formatDate(true));
+        }
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getEntryId(): int
     {
-        return $this->getData(self::ENTRY_ID);
+        return (int) $this->getData(self::ENTRY_ID);
     }
 
     /**
@@ -44,7 +87,7 @@ class WMSSyncRequestHistory extends AbstractModel implements WMSSyncRequestHisto
      */
     public function getStatusCode(): int
     {
-        return $this->getData(self::STATUS_CODE);
+        return (int) $this->getData(self::STATUS_CODE);
     }
 
     /**
@@ -60,7 +103,12 @@ class WMSSyncRequestHistory extends AbstractModel implements WMSSyncRequestHisto
      */
     public function getQtyReceived(): ?int
     {
-        return $this->getData(self::QTY_RECEIVED);
+        $qtyReceived = $this->getData(self::QTY_RECEIVED);
+        if (is_string($qtyReceived)) {
+            $qtyReceived = (int) $qtyReceived;
+        }
+
+        return $qtyReceived;
     }
 
     /**
