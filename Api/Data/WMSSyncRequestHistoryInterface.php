@@ -45,10 +45,10 @@ interface WMSSyncRequestHistoryInterface
     public function getQtyReceived(): ?int;
 
     /**
-     * @param int $qtyReceived
+     * @param int|null $qtyReceived
      * @return WMSSyncRequestHistoryInterface
      */
-    public function setQtyReceived(int $qtyReceived): WMSSyncRequestHistoryInterface;
+    public function setQtyReceived(?int $qtyReceived): WMSSyncRequestHistoryInterface;
 
     /**
      * @return string|null
@@ -56,10 +56,10 @@ interface WMSSyncRequestHistoryInterface
     public function getErrorMsg(): ?string;
 
     /**
-     * @param string $errorMsg
+     * @param string|null $errorMsg
      * @return WMSSyncRequestHistoryInterface
      */
-    public function setErrorMsg(string $errorMsg): WMSSyncRequestHistoryInterface;
+    public function setErrorMsg(?string $errorMsg): WMSSyncRequestHistoryInterface;
 
     /**
      * @return string|null

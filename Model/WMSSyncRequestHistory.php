@@ -114,7 +114,7 @@ class WMSSyncRequestHistory extends AbstractModel implements WMSSyncRequestHisto
     /**
      * @inheritDoc
      */
-    public function setQtyReceived(int $qtyReceived): WMSSyncRequestHistoryInterface
+    public function setQtyReceived(?int $qtyReceived): WMSSyncRequestHistoryInterface
     {
         return $this->setData(self::QTY_RECEIVED, $qtyReceived);
     }
@@ -130,7 +130,7 @@ class WMSSyncRequestHistory extends AbstractModel implements WMSSyncRequestHisto
     /**
      * @inheritDoc
      */
-    public function setErrorMsg(string $errorMsg): WMSSyncRequestHistoryInterface
+    public function setErrorMsg(?string $errorMsg): WMSSyncRequestHistoryInterface
     {
         return $this->setData(self::ERROR_MSG, $errorMsg);
     }
