@@ -11,11 +11,13 @@ use Mikimpe\SyncWithWMS\Model\DTO\WMSSyncRequestResultFactory;
 
 class RealRequest
 {
+    private const SKU_TO_FORCE_ERROR_RESPONSE = 'error';
     private Config $config;
     private ClientInterface $client;
     private WMSSyncRequestResultFactory $WMSSyncRequestResultFactory;
     private ExtractErrorMsgFromWMSResponse $extractErrorMsgFromWMSResponse;
     private ExtractQtyFromWMSResponse $extractQtyFromWMSResponse;
+    private RandomError $randomError;
 
     /**
      * @param Config $config
@@ -23,19 +25,22 @@ class RealRequest
      * @param WMSSyncRequestResultFactory $WMSSyncRequestResultFactory
      * @param ExtractErrorMsgFromWMSResponse $extractErrorMsgFromWMSResponse
      * @param ExtractQtyFromWMSResponse $extractQtyFromWMSResponse
+     * @param RandomError $randomError
      */
     public function __construct(
         Config $config,
         ClientInterface $client,
         WMSSyncRequestResultFactory $WMSSyncRequestResultFactory,
         ExtractErrorMsgFromWMSResponse $extractErrorMsgFromWMSResponse,
-        ExtractQtyFromWMSResponse $extractQtyFromWMSResponse
+        ExtractQtyFromWMSResponse $extractQtyFromWMSResponse,
+        RandomError $randomError
     ) {
         $this->config = $config;
         $this->client = $client;
         $this->WMSSyncRequestResultFactory = $WMSSyncRequestResultFactory;
         $this->extractErrorMsgFromWMSResponse = $extractErrorMsgFromWMSResponse;
         $this->extractQtyFromWMSResponse = $extractQtyFromWMSResponse;
+        $this->randomError = $randomError;
     }
 
     /**
@@ -46,6 +51,10 @@ class RealRequest
     {
         if (!$this->config->getWMSEndpoint()) {
             return $this->buildErrorResponse(400, 'WMS endpoint not configured');
+        }
+
+        if ($this->randomError->execute()) {
+            $sku = self::SKU_TO_FORCE_ERROR_RESPONSE;
         }
 
         $this->client->get($this->config->getWMSEndpoint() . $sku);
@@ -59,7 +68,7 @@ class RealRequest
         try {
             return $this->buildSuccessResponse($this->client->getBody());
         } catch (UnexpectedWMSResponseBodyStructureException $e) {
-            return $this->buildErrorResponse(400, $e->getMessage());
+            return $this->buildErrorResponse(200, $e->getMessage());
         }
     }
 
