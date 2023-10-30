@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mikimpe_SyncWithWMS::mikimpe"
+             title="Mikimpe"
+             module="Mikimpe_SyncWithWMS"
+             sortOrder="100"
+             resource="Mikimpe_SyncWithWMS::sync_request_history"
+        />
+        <add id="Mikimpe_SyncWithWMS::sync_with_wms_request_history"
+             title="Sync With WMS Request History"
+             module="Mikimpe_SyncWithWMS"
+             sortOrder="10"
+             action="wms_sync/history"
+             parent="Mikimpe_SyncWithWMS::mikimpe"
+             resource="Mikimpe_SyncWithWMS::sync_request_history"
+        />
+    </menu>
+</config>

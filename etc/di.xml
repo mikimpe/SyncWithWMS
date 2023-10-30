@@ -8,6 +8,21 @@
     <preference for="Mikimpe\SyncWithWMS\Api\WMSSyncRequestHistoryRepositoryInterface"
                 type="Mikimpe\SyncWithWMS\Model\WMSSyncRequestHistoryRepository"/>
 
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="wms_sync_history_listing_data_source" xsi:type="string">Mikimpe\SyncWithWMS\Model\ResourceModel\WMSSyncRequestHistory\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Mikimpe\SyncWithWMS\Model\ResourceModel\WMSSyncRequestHistory\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wms_sync_request_history</argument>
+            <argument name="resourceModel" xsi:type="string">Mikimpe\SyncWithWMS\Model\ResourceModel\WMSSyncRequestHistory</argument>
+        </arguments>
+    </virtualType>
+
     <type name="Mikimpe\SyncWithWMS\Model\WMSSyncRequestHistoryRepository">
         <arguments>
             <argument name="logger" xsi:type="object">Mikimpe\SyncWithWMS\Virtual\Logger</argument>

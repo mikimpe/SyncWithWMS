@@ -15,3 +15,4 @@
 "Current user is not allowed to perform this action","L'utente corrente non ha i permessi per effettuare questa azione"
 "Enable request logger","Abilita il log delle richieste"
 "If enabled, each WMS request performed will be logged into the log file","Se abilitato, ogni richiesta al WMS verrà loggata nel file di log"
+"WMS Sync Request History","Registro Delle Richieste Al WMS"
