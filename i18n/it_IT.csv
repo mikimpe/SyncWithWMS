@@ -12,3 +12,6 @@
 "WMS endpoint not configured","L'endpoint del WMS non è configurato"
 "Unable to extract product quantity from WMS empty response body","Impossibile recuperare la quantità del prodotto dalla risposta vuota del WMS"
 "Unable to extract product quantity from WMS response body","Impossibile recuperare la quantità del prodotto dalla risposta del WMS"
+"Current user is not allowed to perform this action","L'utente corrente non ha i permessi per effettuare questa azione"
+"Enable request logger","Abilita il log delle richieste"
+"If enabled, each WMS request performed will be logged into the log file","Se abilitato, ogni richiesta al WMS verrà loggata nel file di log"
