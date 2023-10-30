@@ -28,7 +28,7 @@ class DoWMSSyncRequestAndSaveResultTest extends TestCase
         $WMSSyncRequestResult->setQty(10);
         $WMSSyncRequestMock = $this->getMockBuilder(WMSSyncRequest::class)->disableOriginalConstructor()->getMock();
         $WMSSyncRequestMock->method('execute')->willReturn($WMSSyncRequestResult);
-        $doWMSSynRequestAndSaveResult = Bootstrap::getObjectManager()->create(
+        $subject = Bootstrap::getObjectManager()->create(
             DoWMSSyncRequestAndSaveResult::class,
             ['WMSSyncRequest' => $WMSSyncRequestMock]
         );
@@ -40,7 +40,7 @@ class DoWMSSyncRequestAndSaveResultTest extends TestCase
         $historyEntriesBefore = $WMSSYncRequestRepository->getList($searchCriteria)->getItems();
         self::assertCount(0, $historyEntriesBefore);
 
-        $doWMSSynRequestAndSaveResult->execute('test');
+        $subject->execute('test');
 
         $historyEntriesAfter = $WMSSYncRequestRepository->getList($searchCriteria)->getItems();
         self::assertCount(1, $historyEntriesAfter);
