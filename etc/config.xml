@@ -6,6 +6,7 @@
             <general>
                 <enabled>1</enabled>
                 <test_mode>1</test_mode>
+                <wms_endpoint>https://api.mockfly.dev/mocks/5df029e8-40cd-43d0-9c50-9cbf48467a8b/wms-product-qty/</wms_endpoint>
             </general>
         </mikimpe_wms_sync>
     </default>
