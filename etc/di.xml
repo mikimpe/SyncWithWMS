@@ -32,6 +32,12 @@
         </arguments>
     </type>
 
+    <type name="Mikimpe\SyncWithWMS\Model\LogRequestIfEnabled">
+        <arguments>
+            <argument name="logger" xsi:type="object">Mikimpe\SyncWithWMS\Virtual\Logger</argument>
+        </arguments>
+    </type>
+
     <virtualType name="Mikimpe\SyncWithWMS\Virtual\Logger" type="Monolog\Logger">
         <arguments>
             <argument name="name" xsi:type="string">Mikimpe::SyncWithWMS</argument>

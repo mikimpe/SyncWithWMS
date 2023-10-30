@@ -16,23 +16,27 @@ class DoWMSSyncRequestAndSaveResult
     private WMSSyncRequestHistoryInterfaceFactory $WMSSyncRequestHistoryFactory;
     private WMSSyncRequestHistoryRepositoryInterface $WMSSyncRequestHistoryRepository;
     private LoggerInterface $logger;
+    private LogRequestIfEnabled $logRequestIfEnabled;
 
     /**
      * @param WMSSyncRequest $WMSSyncRequest
      * @param WMSSyncRequestHistoryInterfaceFactory $WMSSyncRequestHistoryFactory
      * @param WMSSyncRequestHistoryRepositoryInterface $WMSSyncRequestHistoryRepository
      * @param LoggerInterface $logger
+     * @param LogRequestIfEnabled $logRequestIfEnabled
      */
     public function __construct(
         WMSSyncRequest $WMSSyncRequest,
         WMSSyncRequestHistoryInterfaceFactory $WMSSyncRequestHistoryFactory,
         WMSSyncRequestHistoryRepositoryInterface $WMSSyncRequestHistoryRepository,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        LogRequestIfEnabled $logRequestIfEnabled
     ) {
         $this->WMSSyncRequest = $WMSSyncRequest;
         $this->WMSSyncRequestHistoryFactory = $WMSSyncRequestHistoryFactory;
         $this->WMSSyncRequestHistoryRepository = $WMSSyncRequestHistoryRepository;
         $this->logger = $logger;
+        $this->logRequestIfEnabled = $logRequestIfEnabled;
     }
 
     /**
@@ -54,6 +58,8 @@ class DoWMSSyncRequestAndSaveResult
         } catch (CouldNotSaveException $e) {
             $this->logger->error($e);
         }
+
+        $this->logRequestIfEnabled->execute($WMSSyncRequestHistoryEntity);
 
         return $res;
     }

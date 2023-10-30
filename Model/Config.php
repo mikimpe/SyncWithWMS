@@ -10,6 +10,7 @@ class Config
     private const XML_PATH_MIKIMPE_WMS_SYNC_GENERAL_ENABLED = 'mikimpe_wms_sync/general/enabled';
     private const XML_PATH_MIKIMPE_WMS_SYNC_GENERAL_TEST_MODE = 'mikimpe_wms_sync/general/test_mode';
     private const XML_PATH_MIKIMPE_WMS_SYNC_GENERAL_WMS_ENDPOINT = 'mikimpe_wms_sync/general/wms_endpoint';
+    private const XML_PATH_MIKIMPE_WMS_SYNC_GENERAL_REQUEST_LOGGER_ENABLED = 'mikimpe_wms_sync/general/enable_request_logger';
     private ScopeConfigInterface $scopeConfig;
 
     /**
@@ -43,5 +44,13 @@ class Config
     public function getWMSEndpoint(): string
     {
         return $this->scopeConfig->getValue(self::XML_PATH_MIKIMPE_WMS_SYNC_GENERAL_WMS_ENDPOINT) ?? '';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRequestLoggerEnabled(): bool
+    {
+        return $this->scopeConfig->isSetFlag(self::XML_PATH_MIKIMPE_WMS_SYNC_GENERAL_REQUEST_LOGGER_ENABLED);
     }
 }
